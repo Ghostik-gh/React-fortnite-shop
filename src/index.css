@@ -123,3 +123,22 @@ li {
     opacity: 1;
   }
 }
+
+.toast-container {
+  position: fixed;
+  top: 2rem !important;
+  right: 7rem !important;
+  animation: showAlert 500ms ease-in-out;
+}
+
+@keyframes showAlert {
+  from {
+    opacity: 0;
+    transform: translate(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0rem);
+  }
+}

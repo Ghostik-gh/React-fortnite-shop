@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import { Preloader } from "./Preloader";
 import { ItemList } from "./ItemList";
 import { BasketList } from "./BasketList"
+import { Alert } from "./Alert";
 
 function Shop() {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
     const [isBasketShow, setBasketShow] = useState(false);
+    const [alertName, setAlertName] = useState('');
 
 
     const addOrder = (item) => {
@@ -38,7 +40,8 @@ function Shop() {
             });
             setOrder(newOrder);
         }
-    }
+        setAlertName(item.name);
+    };
 
     const handleBasketShow = () => {
         setBasketShow(!isBasketShow);
@@ -66,6 +69,7 @@ function Shop() {
         });
         setOrder(newOrder);
     }
+
     const reduceQuantity = (itemId) => {
         const newOrder = order.map(item => {
             if (item.id === itemId) {
@@ -82,6 +86,10 @@ function Shop() {
         setOrder(newOrder);
     }
 
+    const closeAlert = () => {
+        setAlertName('');
+    }
+
     useEffect(function getItems() {
         fetch(API_URL, {
             headers: {
@@ -95,6 +103,10 @@ function Shop() {
             })
             .catch(err => console.error(err));
     }, [])
+
+    useEffect(() => {
+        console.log(alertName);
+    });
 
     return <main className="container content">
         <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
@@ -111,6 +123,9 @@ function Shop() {
                 addQuantity={addQuantity}
                 reduceQuantity={reduceQuantity}
             />
+        }
+        {
+            alertName && <Alert name={alertName} closeAlert={closeAlert} />
         }
     </main>
 }
