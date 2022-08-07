@@ -1,23 +1,32 @@
 function Item(props) {
     const {
-        mainId,
+        id,
         name,
         description,
         price,
         full_background,
+        addOrder = Function.prototype,
     } = props;
     return (
-        <div className="card" id={mainId}>
+        <div className="card">
             <div className="card-image">
                 <img src={full_background} alt={name} />
-                {/* <span className="card-title">{name}</span> */}
             </div>
             <div className="card-content">
+                <span className="card-title">{name}</span>
                 <p>{description}</p>
             </div>
             <div className="card-action">
-                <button className="btn" >Buy</button>
-                <span className="right">{price}</span>
+                <button
+                    className="btn"
+                    onClick={() => addOrder({
+                        id,
+                        name,
+                        price,
+                    })}>
+                    Buy
+                </button>
+                <span className="right price">{price}</span>
             </div>
         </div >
     )
