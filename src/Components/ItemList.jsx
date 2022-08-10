@@ -1,7 +1,9 @@
 import { Item } from "./Item";
+import { useContext } from "react";
+import { ShopContext } from "../context"
 
-function ItemList(props) {
-    const { items = [], addOrder = Function.prototype } = props;
+function ItemList() {
+    const { items = [] } = useContext(ShopContext);
 
     if (!items.length) {
         return <h3>Nothing here</h3>
@@ -10,7 +12,7 @@ function ItemList(props) {
     return (
         <div className="items">
             {items.map(item => (
-                <Item key={item.id} addOrder={addOrder} {...item} />
+                <Item key={item.id} {...item} />
             ))}
         </div>
     )

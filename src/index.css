@@ -124,21 +124,18 @@ li {
   }
 }
 
-.toast-container {
-  position: fixed;
-  top: 2rem !important;
-  right: 7rem !important;
-  animation: showAlert 500ms ease-in-out;
+#toast-container {
+  top: 3rem !important;
+  animation: fade-in 250ms ease-in-out;
 }
 
-@keyframes showAlert {
+@keyframes fade-in {
   from {
-    opacity: 0;
-    transform: translate(2rem);
+      opacity: 0;
+      transform: translateY(2rem);
   }
-
   to {
-    opacity: 1;
-    transform: translate(0rem);
+      opacity: 1;
+      transform: translateY(0rem);
   }
 }
