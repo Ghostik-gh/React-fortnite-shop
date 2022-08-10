@@ -6,11 +6,6 @@ export function reducer(state, { type, payload }) {
                 items: payload || [],
                 loading: false,
             }
-        case 'CLOSE_ALERT':
-            return {
-                ...state,
-                alertName: '',
-            }
         case 'REMOVE_FROM_BASKET':
             return {
                 ...state,
@@ -81,7 +76,13 @@ export function reducer(state, { type, payload }) {
             return {
                 ...state,
                 order: newOrder,
-                alertName: payload.name,
+                alertName: payload.item.name,
+            }
+        }
+        case 'CLOSE_ALERT': {
+            return {
+                ...state,
+                alertName: '',
             }
         }
         default:
